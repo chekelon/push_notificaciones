@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:notificaciones/src/screens/home_screen.dart';
 import 'package:notificaciones/src/screens/message_screen.dart';
+import 'package:notificaciones/src/services/local_notification.dart';
+export 'package:notificaciones/src/services/local_notification.dart';
 import 'package:notificaciones/src/services/push_notifications_service.dart';
 
 void main() async {
@@ -24,10 +26,10 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
+    final Notificaciones noti = new Notificaciones();
+    noti.init();
     PushNotificationService.messageStream.listen((message) {
       //print('MyApp: $message');
-
       navigatorKey.currentState?.pushNamed('message', arguments: message);
       final snackBar = SnackBar(content: Text(message));
       messengerKey.currentState?.showSnackBar(snackBar);
